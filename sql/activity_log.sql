@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS activity_log (
+	log_id INT PRIMARY KEY AUTO_INCREMENT,
+	admin_id INT NOT NULL,
+	action VARCHAR(50) NOT NULL,
+	details TEXT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (admin_id) REFERENCES admin(admin_id)
+);

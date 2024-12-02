@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Return - Library System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+		<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast">
+            <strong>Library System</strong>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <details role="list" dir="rtl">
+            <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>
+            <ul role="listbox">
+              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+              <li><a href="#" data-theme-switcher="light">Light</a></li>
+              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+            </ul>
+          </details>
+        </li>
+				<li>
+				<form id="logoutForm" action="/logout" method="POST" style="margin:0">
+					<button type="submit" class="outline" onclick="handleLogout(event)">Logout</button>
+				</form>
+			</li>
+      </ul>
+    </nav>
+
+    <main class="container">
+        <div class="form-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+        <hgroup>
+						<h1>Book Return</h1>
+						<h2>Process returned books</h2>
+        </hgroup>
+            </div>
+        </div>
+
+        <div id="errorAlert" class="alert alert-error" role="alert">
+            <strong>Error!</strong> <span id="errorMessage"></span>
+        </div>
+
+        <div id="successAlert" class="alert alert-success" role="alert">
+            <strong>Success!</strong> Book has been returned successfully!
+        </div>
+
+        <div class="grid-2">
+            <div>
+                <label for="checkoutSearch">Search Checkout</label>
+                <input type="search" id="checkoutSearch" name="checkoutSearch" placeholder="Enter checkout ID, book title, or member name">
+            </div>
+        </div>
+
+        <div id="checkoutInfo" class="section">
+            <h3>Checkout Information</h3>
+            <div class="grid-2">
+                <div>
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" id="bookTitle" name="bookTitle" readonly>
+                </div>
+                <div>
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" name="isbn" readonly>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <label for="memberName">Member Name</label>
+                    <input type="text" id="memberName" name="memberName" readonly>
+                </div>
+                <div>
+                    <label for="memberId">Member ID</label>
+                    <input type="text" id="memberId" name="memberId" readonly>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <label for="checkoutDate">Checkout Date</label>
+                    <input type="date" id="checkoutDate" name="checkoutDate" readonly>
+                </div>
+                <div>
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" name="dueDate" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Return Details</h3>
+            <div class="grid-2">
+                <div>
+                    <label for="returnDate">Return Date</label>
+                    <input type="date" id="returnDate" name="returnDate" required>
+                </div>
+                <div>
+                    <label for="condition">Book Condition</label>
+                    <select id="condition" name="condition" required>
+                        <option value="">Select condition...</option>
+                        <option value="good">Good</option>
+                        <option value="damaged">Damaged</option>
+                        <option value="lost">Lost</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes" placeholder="Add any notes about the return (condition issues, late fees, etc.)"></textarea>
+            </div>
+        </div>
+<div class="button-group">
+            <button class="secondary" onclick="window.location.href='/dashboard'">Cancel</button>
+            <button id="confirmReturn">Confirm Return</button>
+        </div>
+    </main>
+				<script src="/js/theme.js"></script>
+				<script src="/js/returns.js"></script>
+</body>
+</html>

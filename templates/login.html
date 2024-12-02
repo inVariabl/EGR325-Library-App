@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library System • Sign in</title>
+    <meta name="description" content="A classless login page for the Library Management System">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+		<link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body class="login-page">
+    <!-- Nav -->
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast" onclick="event.preventDefault()">
+            <strong>Library System</strong>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <details role="list" dir="rtl">
+            <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>
+            <ul role="listbox">
+              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+              <li><a href="#" data-theme-switcher="light">Light</a></li>
+              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <main class="container">
+      <article class="login">
+        <hgroup>
+          <h1>Sign in</h1>
+          <h2>Please sign in to continue</h2>
+        </hgroup>
+        <form id="loginForm">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            aria-label="Username"
+            required
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            aria-label="Password"
+            required
+          >
+          <button type="submit" aria-busy="false">Sign in</button>
+          <div id="error-message" class="error-message" role="alert"></div>
+        </form>
+      </article>
+    </main>
+  </body>
+				<script src="/js/theme.js"></script>
+	<script src="/js/login.js"></script>
+</html>

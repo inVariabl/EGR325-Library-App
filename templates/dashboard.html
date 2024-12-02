@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library System • Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+		<link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast">
+            <strong>Library System</strong>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <div class="user-info">
+            <span>Welcome,</span>
+						<strong id="username">{{.Data.Username}}</strong>
+          </div>
+        </li>
+        <li>
+          <details role="list" dir="rtl">
+            <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>
+            <ul role="listbox">
+              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+              <li><a href="#" data-theme-switcher="light">Light</a></li>
+              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+            </ul>
+          </details>
+        </li>
+				<li>
+				<form id="logoutForm" action="/logout" method="POST" style="margin:0">
+					<button type="submit" class="outline" onclick="handleLogout(event)">Logout</button>
+				</form>
+			</li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <main class="container">
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <h3 id="total-books">0</h3>
+          <p>Total Books</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="books-available">0</h3>
+          <p>Books Available</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="total-members">0</h3>
+          <p>Total Members</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="active-checkouts">0</h3>
+          <p>Active Checkouts</p>
+        </div>
+      </div>
+
+      <div class="actions-grid">
+        <a href="/add-book" class="action-card">
+          <article>
+            <h4>Add Book</h4>
+            <p>Add new books to the library</p>
+          </article>
+        </a>
+        <a href="/checkout" class="action-card">
+          <article>
+            <h4>Book Checkout</h4>
+            <p>Process book checkouts</p>
+          </article>
+        </a>
+        <a href="/returns" class="action-card">
+          <article>
+            <h4>Book Return</h4>
+            <p>Process book returns</p>
+          </article>
+        </a>
+        <a href="/members" class="action-card">
+          <article>
+            <h4>Members</h4>
+            <p>Manage library members</p>
+          </article>
+        </a>
+      </div>
+
+<div class="section activity-section">
+    <h4>Recent Activity</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Action</th>
+                <th>Details</th>
+                <th>User</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td colspan="4">Loading activity...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+    </main>
+				<script src="/js/theme.js"></script>
+		<script src="/js/dashboard.js"></script>
+		<script src="/js/activity.js"></script>
+</body>
+</html>

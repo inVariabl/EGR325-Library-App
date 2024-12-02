@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library System • Add Book</title>
+    <meta name="description" content="Add new books to the library system">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+		<link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class="container-fluid">
+      <ul>
+        <li>
+          <a href="/" class="contrast">
+            <strong>Library System</strong>
+          </a>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <details role="list" dir="rtl">
+            <summary aria-haspopup="listbox" role="link" class="contrast">Theme</summary>
+            <ul role="listbox">
+              <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+              <li><a href="#" data-theme-switcher="light">Light</a></li>
+              <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+            </ul>
+          </details>
+        </li>
+				<li>
+				<form id="logoutForm" action="/logout" method="POST" style="margin:0">
+					<button type="submit" class="outline" onclick="handleLogout(event)">Logout</button>
+				</form>
+			</li>
+      </ul>
+    </nav>
+
+    <!-- Main -->
+    <main class="container">
+      <div class="form-header">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+        </svg>
+        <hgroup>
+          <h1>Add New Book</h1>
+          <h2>Add a new book to the library system</h2>
+        </hgroup>
+      </div>
+
+      <div id="errorAlert" class="alert alert-error" role="alert">
+        <strong>Error!</strong> <span id="errorMessage"></span>
+      </div>
+
+      <div id="successAlert" class="alert alert-success" role="alert">
+        <strong>Success!</strong> Book has been added successfully!
+      </div>
+
+      <form id="addBookForm">
+        <div class="grid-2">
+          <input
+            type="text"
+            name="isbn"
+            placeholder="ISBN"
+            aria-label="ISBN"
+            required
+          >
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            aria-label="Title"
+            required
+          >
+        </div>
+
+        <div class="grid-2">
+          <input
+            type="text"
+            name="author"
+            placeholder="Author"
+            aria-label="Author"
+          >
+          <input
+            type="text"
+            name="publisher"
+            placeholder="Publisher"
+            aria-label="Publisher"
+          >
+        </div>
+
+        <div class="grid-2">
+          <input
+            type="number"
+            name="publication_year"
+            placeholder="Publication Year"
+            aria-label="Publication Year"
+            min="1000"
+            max="2024"
+          >
+          <input
+            type="text"
+            name="category"
+            placeholder="Category"
+            aria-label="Category"
+          >
+        </div>
+
+        <div class="grid-2">
+          <select name="language" aria-label="Language">
+            <option value="English">English</option>
+            <option value="Spanish">Spanish</option>
+            <option value="French">French</option>
+            <option value="German">German</option>
+            <option value="Chinese">Chinese</option>
+            <option value="Japanese">Japanese</option>
+            <option value="Other">Other</option>
+          </select>
+          <input
+            type="number"
+            name="pages"
+            placeholder="Pages"
+            aria-label="Pages"
+            min="1"
+          >
+        </div>
+
+        <div class="grid-2">
+          <input
+            type="number"
+            name="available_copies"
+            placeholder="Available Copies"
+            aria-label="Available Copies"
+            min="0"
+            value="1"
+          >
+          <input
+            type="number"
+            name="total_copies"
+            placeholder="Total Copies"
+            aria-label="Total Copies"
+            min="1"
+            value="1"
+          >
+        </div>
+
+        <input
+          type="text"
+          name="shelf_location"
+          placeholder="Shelf Location"
+          aria-label="Shelf Location"
+        >
+
+        <div class="button-group">
+          <button type="reset" class="secondary outline">Reset</button>
+          <button type="submit">Add Book</button>
+        </div>
+      </form>
+    </main>
+				<script src="/js/theme.js"></script>
+		<script src="/js/add-book.js"></script>
+</body>
+</html>

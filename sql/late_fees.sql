@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS late_fees (
+	fee_id INT PRIMARY KEY AUTO_INCREMENT,
+	checkout_id INT NOT NULL,
+	amount DECIMAL(10,2) NOT NULL,
+	paid BOOLEAN DEFAULT FALSE,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	paid_at TIMESTAMP NULL,
+	FOREIGN KEY (checkout_id) REFERENCES checkout(checkout_id)
+);
