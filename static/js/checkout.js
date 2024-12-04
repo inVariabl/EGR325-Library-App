@@ -1,3 +1,4 @@
+// static/js/checkout.js
 document.addEventListener('DOMContentLoaded', () => {
   // Elements
   const bookSearch = document.getElementById('bookSearch');
@@ -159,7 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('shelfLocation').value = book.shelf_location || '';
   }
 
-  function displayMemberInfo(member) {
+  function displayMemberInfo(memberResponse) {
+    const member = memberResponse.member;
     document.getElementById('memberName').value = member.name;
     document.getElementById('memberName').dataset.memberId = member.member_id;
     document.getElementById('email').value = member.email || '';

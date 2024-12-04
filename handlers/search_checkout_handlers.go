@@ -1,6 +1,8 @@
+// handlers/search_checkout_handlers.go
 package handlers
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"library-app/db"
@@ -15,7 +17,6 @@ func ReturnsPageHandler(w http.ResponseWriter, r *http.Request) {
 	renderTemplate(w, "returns", PageData{Title: "Book Return"})
 }
 
-// SearchMembers handles member search requests
 func SearchMembers(w http.ResponseWriter, r *http.Request) {
 	query := r.URL.Query().Get("q")
 	if query == "" {
@@ -23,16 +24,21 @@ func SearchMembers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var members []models.MemberResponse
-	err := db.DB.Select(&members, `
+	var rawResults []struct {
+		models.Member
+		CheckoutCount int          `db:"checkout_count"`
+		LastCheckout  sql.NullTime `db:"last_checkout"`
+	}
+
+	err := db.DB.Select(&rawResults, `
         SELECT
-            m.*,
+            m.member_id, m.name, m.email, m.phone_number, m.membership_date, m.address,
             COUNT(c.checkout_id) as checkout_count,
             MAX(c.checkout_date) as last_checkout
         FROM member m
         LEFT JOIN checkout c ON m.member_id = c.member_id
         WHERE m.name LIKE ? OR m.email LIKE ? OR CAST(m.member_id AS CHAR) LIKE ?
-        GROUP BY m.member_id
+        GROUP BY m.member_id, m.name, m.email, m.phone_number, m.membership_date, m.address
         LIMIT 10`,
 		"%"+query+"%", "%"+query+"%", "%"+query+"%")
 
@@ -42,7 +48,19 @@ func SearchMembers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sendSuccessResponse(w, "", members)
+	var response []models.MemberResponse
+	for _, r := range rawResults {
+		memberResp := models.MemberResponse{
+			Member:        r.Member,
+			CheckoutCount: r.CheckoutCount,
+		}
+		if r.LastCheckout.Valid {
+			memberResp.LastCheckout = r.LastCheckout.Time
+		}
+		response = append(response, memberResp)
+	}
+
+	sendSuccessResponse(w, "", response)
 }
 
 // ProcessCheckout handles book checkout requests

@@ -1,3 +1,4 @@
+// models/member.go
 package models
 
 import "time"
